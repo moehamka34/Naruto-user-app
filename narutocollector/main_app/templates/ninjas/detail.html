@@ -6,11 +6,11 @@
     <div class="col s6">
       <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ ninja.name</span>
+            <span class="card-title">{{ ninja.name}}</span>
             <p>Village: {{ninja.village}}</p>
             <p>Description: {{ ninja.description }}</p>
             <p>Age: {{ ninja.age }} </p>
-            <p>Jitsus {{ ninja.jitsus }}</p>
+            
         </div>
         <div class="card-action">
             <a href="{% url 'ninjas_update' ninja.id %}">Edit</a>
@@ -53,3 +53,28 @@
     <h5>No Jitsus :(</h5>
     {% endif %}
   </div>
+  <div class="col s6">
+    <h3>Available Jitsus</h3>
+    {% if jitsus.count %} {% for jitsu in jitsus.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A <span style="color: {{ jitsu.color }}">{{ jitsu.color }}</span>
+          {{ jitsu.name }}
+        </span>
+        {{jitsu.type}}
+    </span>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'assoc_toy' cat.id toy.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn">Add</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{ninja.name}} Already Has All Jitsus Available</h5>
+    {% endif %}
+
+  
+{% endblock %}

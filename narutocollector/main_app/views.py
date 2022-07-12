@@ -27,9 +27,9 @@ def ninjas_index(request):
 
 def ninjas_detail(request, ninja_id):
   ninja = Ninja.objects.get(id=ninja_id)
-  jitsus_ninja_doesnt_have = Jitsu.objects.exclude(id__in = ninja.jitsus.all().values_list('id'))
+
   return render(request, 'ninjas/detail.html', {
-    'jitsus': jitsus_ninja_doesnt_have
+    'ninja':ninja
   })
 
 
@@ -90,17 +90,17 @@ def signup(request):
 
 class NinjaCreate(CreateView):
   model = Ninja
-  fields = ['name','village', 'description', 'age' , 'jitsus']
-  success_url = 'ninjas/'
+  fields = ['name','village', 'description', 'age' ]
+  success_url = '/ninjas/'
 
-  def form_valid(self, form):
-    form.instance.user = self.request.user
-    return super().form_valid(form)
+#   def form_valid(self, form):
+#     form.instance.user = self.request.user
+#     return super().form_valid(form)
 
 class NinjaUpdate(UpdateView):
   model = Ninja
   # Let's disallow the renaming of a cat by excluding the name field!
-  fields = ['village', 'description', 'age', 'jitsus']
+  fields = ['village', 'description', 'age']
 
 class NinjaDelete(DeleteView):
   model = Ninja

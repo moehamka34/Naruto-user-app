@@ -20,7 +20,6 @@ class Ninja(models.Model):
     village = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
-    jitsus = models.ManyToManyField(Jitsu)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -29,7 +28,7 @@ class Ninja(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'ninja_id': self.id})
     
-    # ninja = models.ForeignKey(Ninja, on_delete=models.CASCADE)
+    #ninja = models.ForeignKey(Ninja, on_delete=models.CASCADE)
 
 class Photo(models.Model):
   url = models.CharField(max_length=200)
