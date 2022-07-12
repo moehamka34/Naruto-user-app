@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Ninja User Page </h1>
+
+<div class="row">
+    <div class="col s6">
+      <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ ninja.name</span>
+            <p>Village: {{ninja.village}}</p>
+            <p>Description: {{ ninja.description }}</p>
+            <p>Age: {{ ninja.age }} </p>
+            <p>Jitsus {{ ninja.jitsus }}</p>
+        </div>
+        <div class="card-action">
+            <a href="{% url 'ninjas_update' ninja.id %}">Edit</a>
+            <a href="{% url 'ninjas_delete' ninja.id %}">Delete</a>
+        </div>
+        {% for photo in ninja.photo_set.all %}
+    <img class="responsive-img card-panel" src="{{ photo.url }}" alt="{{ ninja.name }}">
+    {% empty %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    {% endfor %}
+    <form 
+    action="{% url 'add_photo' ninja.id %}" 
+    class="card-panel"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <input type="file" name="photo-file" />
+    <br />
+    <br />
+    <input type="submit" class="btn" value="Upload Photo">
+  </form>
+  </div>
+  <hr />
+<div class="row">
+  <div class="col s6">
+    <h3>{{ ninja.name }}'s Jitsus</h3>
+    {% if ninja.jitsus.count %} {% for jitsu in ninja.jitsus.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A <span style="color: {{ jitsu.color }}">{{ jitsu.color }}</span>
+          {{ jitsu.name }}
+        </span>
+        {{ jitsu.type}}
+    </span>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>No Jitsus :(</h5>
+    {% endif %}
+  </div>

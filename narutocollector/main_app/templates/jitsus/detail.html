@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Jitsu Details</h1>
+
+<div class="card">
+  <a href="{% url 'jitsus_detail' jitsu.id %}">
+    <div class="card-content">
+      <span class="card-title"
+        >A
+        <span class="{{ jitsu.color.lower }}-text">{{ jitsu.color }}</span>
+        {{jitsu.name}}</span
+      >
+      {{jitsu.type}} </span>
+    </div>
+    <div class="card-action">
+      <a href="{% url 'jitsus_update' jitsu.id %}">Edit</a>
+      <a href="{% url 'jitsus_delete' jitsu.id %}">Delete</a>
+    </div>
+  </a>
+</div>
+
+{% endblock %}
