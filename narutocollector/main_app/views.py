@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Jitsu, Ninja, Photo
 
 import uuid, boto3 
-S3_BASE_URL ='https://s3-us-east-1.amazonaws.com/'
+S3_BASE_URL ='https://s3.us-east-1.amazonaws.com/'
 BUCKET='catcollector-avatar-466'
 
 # Create your views here.
@@ -27,9 +27,9 @@ def ninjas_index(request):
 
 def ninjas_detail(request, ninja_id):
   ninja = Ninja.objects.get(id=ninja_id)
-
+  jitsus_ninja_doesnt_have = Jitsu.objects.exclude(id__in = ninja.jitsus.all().values_list('id'))
   return render(request, 'ninjas/detail.html', {
-    'ninja':ninja
+    'ninja':ninja, 'jitsus': jitsus_ninja_doesnt_have
   })
 
 
@@ -88,19 +88,19 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 
-class NinjaCreate(CreateView):
+class NinjaCreate(LoginRequiredMixin, CreateView):
   model = Ninja
-  fields = ['name','village', 'description', 'age' ]
+  fields = ['name','village', 'description', 'age', 'likes', 'dislikes' ]
   success_url = '/ninjas/'
 
-#   def form_valid(self, form):
-#     form.instance.user = self.request.user
-#     return super().form_valid(form)
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 class NinjaUpdate(UpdateView):
   model = Ninja
   # Let's disallow the renaming of a cat by excluding the name field!
-  fields = ['village', 'description', 'age']
+  fields = ['village', 'description', 'age', 'likes', 'dislikes']
 
 class NinjaDelete(DeleteView):
   model = Ninja

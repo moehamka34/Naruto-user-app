@@ -10,6 +10,8 @@
             <p>Village: {{ninja.village}}</p>
             <p>Description: {{ ninja.description }}</p>
             <p>Age: {{ ninja.age }} </p>
+            <p>Likes: {{ninja.likes}}</p>
+            <p>Dislikes: {{ninja.dislikes}}</p>
             
         </div>
         <div class="card-action">
@@ -66,7 +68,7 @@
     </span>
       </div>
       <div class="card-action">
-        <form action="{% url 'assoc_toy' cat.id toy.id %}" method="post">
+        <form action="{% url 'assoc_jitsu' ninja.id jitsu.id %}" method="post">
           {% csrf_token %}
           <button type="submit" class="btn">Add</button>
         </form>

@@ -20,6 +20,9 @@ class Ninja(models.Model):
     village = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
+    jitsus = models.ManyToManyField(Jitsu)
+    likes = models.CharField(max_length=100)
+    dislikes = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
