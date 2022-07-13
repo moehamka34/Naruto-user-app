@@ -126,7 +126,7 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-WSGI_APPLICATION = 'narutocollector.wsgi.application'
+WSGI_APPLICATION = 'narutocollector1.wsgi.application'
 # catcollector is the project name
 import django_heroku
 django_heroku.settings(locals())
