@@ -1,1 +1,1 @@
-web: gunicorn narutocollector/narutocollector.wsgi
+web: gunicorn narutocollector.wsgi
