@@ -15,6 +15,8 @@
 <img src="https://i.imgur.com/sl87te7.png">
 
 <h1>Getting Started</h1>
+<p>Click the link below to get started!</p>
+<a herf="https://project-naruto.herokuapp.com/">Click Here</a>
 
 
 <h1>Next Steps</h1>
