@@ -116,7 +116,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
+
 LOGIN_REDIRECT_URL = '/ninjas/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # catcollector is the project name
 import django_heroku
 django_heroku.settings(locals())
+
+STATIC_URL = '/static/'
